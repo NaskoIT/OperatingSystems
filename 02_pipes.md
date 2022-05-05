@@ -215,3 +215,94 @@ Hint: /etc/passwd
 файла и времето (unix time) на последната промяна.
 ```find ~ -type f -mmin 15 2>/dev/null```
 
+03-b-9051.txt
+Използвайки файл population.csv, намерете колко е общото население на света
+през 2008 година. А през 2016?
+```grep ",2008" population.csv | cut -d , -f 4 | awk 'BEGIN{sum=0} {sum += $1} END {print sum}'```
+
+```#!/bin/bash
+
+total=0
+for i in $(grep ",2008" population.csv | cut -d , -f 4); do
+        total=$((total + i))
+done;
+
+echo $total
+```
+``` tail -n +1 population.csv | awk -F , '{if($3 == 2008) print $4;}' | paste -sd+ | bc```
+
+03-b-9052.txt
+Използвайки файл population.csv, намерете през коя година в България има най-много население.
+```egrep "Bulgaria" population.csv | sort -t "," -k 4 -nr | head -1 | cut -d "," -f 3```
+```grep "Bulgaria" population.csv | cut -d , -f 4 | awk 'BEGIN { x=0 } $1>x { x=$1 } END {print x}'```
+```
+#!/bin/bash
+x=0
+for i in $(grep "Albania" population.csv | cut -d , -f 4 | grep "Albania" population.csv | cut -d , -f 4); do
+        if (($i>$x)); then
+                x=$i
+        fi
+done
+
+echo $x
+```
+
+03-b-9053
+Използвайки файл population.csv, намерете коя държава има най-много население през 2016. А коя е с най-малко население?
+(Hint: Погледнете имената на държавите)
+```grep ',2016' population.csv | sort -t , -k 4 -nr | head -1 | cut -d , -f 1```
+```
+#!/usr/bin/awk -f
+BEGIN {
+        max=0;
+        FS=",";
+        min_name="";
+        min=9999999999;
+        max_name="";
+}
+{
+        if($3 == "2016") {
+                if(max < $4 ) { max = $4; min_name=$1; }
+                if(min > $4 ) { min = $4; max_name=$1; }
+        }
+}
+END {
+        printf("%s, %s\n", max_name, max);
+        printf("%s, %s\n", min_name, min);
+}
+```
+
+03-b-9054
+Използвайки файл population.csv, намерете коя държава е на 42-ро място по
+население през 1969. Колко е населението й през тази година?
+```grep ",1969" population.csv | sort -t , -k 4 -nr | head -42 | tail -1 | cut -d , -f 1```
+
+03-b-9102.txt
+Да се изведат само имената на песните.
+```find songs -type f -printf "%p\n" | tr -d "^songs./"```
+
+03-b-9102.txt
+Имената на песните да се направят с малки букви, да се заменят спейсовете с
+долни черти и да се сортират.
+```find songs -type f -printf "%p\n" | tr -d "songs/" | tr [A-Z] [a-z] | tr " " _ | sort```
+
+03-b-9104.txt
+Да се изведат всички албуми, сортирани по година.
+```find songs -type f | cut -d '(' -f 2 | cut -d ')' -f 1 | sort -t , -k 2 -n | cut -d , -f 1```
+
+03-b-9105.txt
+Да се преброят/изведат само песните на Beatles и Pink.
+```find songs -type f -printf "%p\n" | egrep "Beatles - |Pink - " | wc -l```
+
+03-b-9106.txt
+а се направят директории с имената на уникалните групи. За улеснение, имената
+от две думи да се напишат слято:
+Beatles, PinkFloyd, Madness
+```find songs -type f -printf "%p\n" | cut -d "-" -f 1 | sed "s/ //g;s/songs\///g" | sort -u | mkdir````
+
+03-b-9200.txt
+Напишете серия от команди, които извеждат детайли за файловете и директориите в
+текущата директория, които имат същите права за достъп както най-големият файл
+в /etc директорията.
+```find . -perm $(find /etc -type f -printf "%p %m %s\n" 2> /dev/null | sort -k 3n | tail -1 | cut -d " " -f 2) -printf "%p %m %s\n"```
+
