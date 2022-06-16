@@ -11,7 +11,7 @@ echo $strvar | awk '{print length}'
 find ~/ -type f -printf "%f\n" 2>/dev/null # намира именета на всички файлове в home директорията на текущия потребител
 # -L - follow symbolic link
 # -type l - всички файлове, които са symbolic link
-find -L /home/students -type l 2>/dev/null # намира всички symbolic links с не сeсъществуващ  destination
+find -L /home/students -type l 2>/dev/null # намира всички symbolic links с несъществуващ destination
 find ~/ -maxdepth 1 -type f 2>/dev/null -exec basename {} \; # намира файловете само в текущата директория (не търси във вътрешните директории)
 find . -size 10k -print # find all files greater than 10k in the current directory
 # ! -name ".*" - името не трябва да запова с .
@@ -24,8 +24,8 @@ find ~/ -type f -printf "%s %f\n" | sort -n | tail -1 # find the biggest file
 ### stat
 ```bash
 # %N - quoted file name with dereference if symbolic link
-# is symbolic link: '/home/students/s62577/baba' -> '/foo/bar/baz'
-stat -c %N file_path | cut -d "'" -f 4 # връща файла към който сочи symbolic link или празен стринг
+# if symbolic link: '/home/students/s62577/baba' -> '/foo/bar/baz'
+stat -c %N file_path | cut -d "'" -f 4 # връща файла, към който сочи symbolic link или празен стринг
 stat -c %h /home/students/s62577/test.txt # number of hard links
 stat -c %u path # намира uid на собственика на файла, %U - username of the owner
 stat -c %A path # връща правата на файла/директорията в human readable format (-rw-r--r--), %a - в octal format (755)
@@ -34,13 +34,13 @@ stat -c %A path # връща правата на файла/директория
 ### sed
 ```bash
 echo "some other another" | sed -E "s/([^ ]+ [^ ]+) (.*)/\1 insert \2/" # вмъкване на стойнот на определено място
-sed -i "s/pattern/replace_value/g; s/pattern2/replace_val2/" "file_path" - edit files in place (модифицира самия фйал) -i --in-place
+sed -i "s/pattern/replace_value/g; s/pattern2/replace_val2/" "file_path" # edit files in place (модифицира самия фйал) -i --in-place
 ```
 
 ### cut
 ```bash
 cut -d " " -f 1 # split by space and get the first column
-cut -d "," -f 2 # всички колони след първата. Тоест: 2, 3, 4...
+cut -d "," -f 2,5 # 2, 3, 4, 5
 cut -c 3 # get the third character
 cut -c 2,3,4 # get 2-nd, 3-rd and 4-th characters
 cut -c 2-10 # get from 2-nd to 10-th characters
@@ -76,7 +76,7 @@ uniq -c | awk '{$1=$1}1' # --count всеки запис колко пъти с�
 ```bash
 # Represents extended global regular expression
 cat | egrep "^[-]?[0-9]+$" | sort -n > "${temp}" # чете входа от клавиатурата, взима само числата, сортира и ги записва във файл
-if egrep -q "pattern" file_name ; then - # проверка дали съществува нещо във файл -q = quiet
+if egrep -q "pattern" file_name ; then - # проверка дали се match-ва pattern-a в съдържанието на файлa -q = quiet
 egrep "(foo|bar)" file.txt # match all the lines in file.txt, which contains "foo" or "bar"
 # grep -v - reversed match
 # grep -i - case insensitive searchable
@@ -88,11 +88,6 @@ egrep "(foo|bar)" file.txt # match all the lines in file.txt, which contains "fo
 ```bash
 ps -u "root" -o pid #връща process id-тата на всички текущи процеси на root потребителя
 ps -eo -pid,user,args -- sort user # сортира по user
-#
-```
-
-### ps
-```bash
 ps -e -o user=,pid= # показва всички активни процеси с потребителското име и идентификатора на процеса. След user и pid има = - това премахва header-a
 ps -e -o etimes # връща колко секунди е работил прцеоса
 ```
@@ -105,7 +100,7 @@ tempFile="${mktemp}" # съзадава временен файл и връща 
 
 # Change file permissions
 chmod 775 file
-chmod -R 775 folder - recursively chmod folder to 775
+chmod -R 775 folder # recursively chmod folder to 775
 ```
 
 ### Input and output redirection
@@ -181,7 +176,7 @@ a="5"; b="6"
 * for do done
 * while do done
 * until do done
-```
+```bash
 # подаване на изхода на команда като вход на while loop
 while read line; do
         echo "$line"
