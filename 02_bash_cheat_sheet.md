@@ -19,6 +19,7 @@ find . -size 10k -print # find all files greater than 10k in the current directo
 find ~/ -type f ! -name ".*" -printf "%T@ %f\n" 2>/dev/null | sort -n -t ' ' -k1 | tail -1 # find the most recently modified regular file
 find ~/ -mmin -15 -type f # find the files modified in the last 15 minutes
 find ~/ -type f -printf "%s %f\n" | sort -n | tail -1 # find the biggest file
+#  %Y -File's  type  (like %y), plus follow symbolic links: `L'=loop, `N'=nonexistent, `?' for any other error when determining the type of the target of a symbolic link.
 ```
 
 ### stat
@@ -44,9 +45,10 @@ cut -d "," -f 2,5 # 2, 3, 4, 5
 cut -c 3 # get the third character
 cut -c 2,3,4 # get 2-nd, 3-rd and 4-th characters
 cut -c 2-10 # get from 2-nd to 10-th characters
+echo "abcdefgh" | cut -c 3- # cdefgh
 echo "abcdefgh" | cut -c 3 # c
 echo "abcdefgh" | cut -c 2,3,5 # bce
-"abcdefgh" | cut -c 2-6 # bcdef
+echo "abcdefgh" | cut -c 2-6 # bcdef
 ```
 
 ### sort
