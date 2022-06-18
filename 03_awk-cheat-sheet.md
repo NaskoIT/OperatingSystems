@@ -125,4 +125,99 @@ awk 'BEGIN {
 awk 'BEGIN {grade = 5.2; message = sprintf("%s has %.2f", "Pesho", grade);} $0=="no match" {print} END {print message}' /etc/passwd
 awk 'BEGIN {print substr("nasko.it", 7)}'
 awk 'BEGIN {print substr("nasko.it", 1, 5)}'
+awk '{gsub(/s[0-9]{5}/, "******"); print}' /etc/passwd
+```
+
+### Common utilities
+* print expression, expression - separated by OFS and terminated by ORS
+* printf(format, expression, expression) > fileName
+* %c - character
+* %d - decimal integer
+* % f - floating-point number
+```bash
+# remove leading whitespace
+echo -e "20\n50\n20" | uniq -c | awk '{$1=$1; print}'
+# предпоследната колона
+awk -F ":" '{print $(NF + 1)}' /etc/passwd
+```
+
+### Execute commands
+```bash
+# print how many active processes has each of the users
+awk -F ":" '{
+    cmd = "ps -u "$1 " | wc -l"; 
+    cmd | getline processesCount; 
+    close(cmd); 
+    print $1 " -> " processesCount}' /etc/passwd
+
+# execute system call -> 0 if successful and 1 if not successful
+awk 'BEGIN { 
+    result = system("echo 45 | egrep -q \"^[0-9]+$\""); 
+    print result 
+}'
+
+awk 'BEGIN {
+       cmd = "date -j -f %s"
+       cmd | getline mydate
+       close(cmd)
+}'
+
+awk 'BEGIN { 
+    result = system("test -d /home/students/s62577/"); 
+    print result
+}'
+
+find /home/students -type l 2>/dev/null | xargs ls -l | awk '
+{
+    res=system("test -e " $11); 
+    if (res != 0) 
+    print $9
+}'
+```
+
+### Functions
+```bash
+awk -F ":" '
+function getUser(username, id) { 
+    return username " -> " id } 
+    BEGIN {
+        print "Username Id"
+    } 
+    {
+        print getUser($1, $3)
+    } 
+    END {
+        print "All printed"
+}' /etc/passwd
+```
+
+### Arrays
+* associative arrays
+* arr["key"] = "value"
+* arr[1] = 45
+* for (key in arr) ...
+* if(key in arr) ...
+* delete arr[key]
+```bash
+awk -F ":" '{used[$1] = 1} END {print length(used)}' /etc/passwd
+
+awk '
+function getName(first, last) { 
+    return sprintf("%s_%s", first, last) 
+} 
+BEGIN {
+    duplicates = 0 
+} 
+$1 != "FirstName" { 
+    key=getName($1, $2); 
+    if (key in used) {
+        duplicates++; 
+    } 
+    else { 
+        used[key]=1
+    } 
+} END {
+    message = duplicates > 0 ? "Yes" : "No"; 
+    printf("%s. There are %d people out of %d with identical names\n", message, duplicates, NR)
+}' payroll.tsv 
 ```
