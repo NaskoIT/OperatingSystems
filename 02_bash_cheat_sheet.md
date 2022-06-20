@@ -41,7 +41,8 @@ sed -i "s/pattern/replace_value/g; s/pattern2/replace_val2/" "file_path" # edit 
 ### cut
 ```bash
 cut -d " " -f 1 # split by space and get the first column
-cut -d "," -f 2,5 # 2, 3, 4, 5
+cut -d "," -f 2,5 # 2, 5
+cut -d "," -f 2-5 # 2, 3, 4, 5
 cut -c 3 # get the third character
 cut -c 2,3,4 # get 2-nd, 3-rd and 4-th characters
 cut -c 2-10 # get from 2-nd to 10-th characters
