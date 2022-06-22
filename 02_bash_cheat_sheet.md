@@ -95,6 +95,22 @@ ps -e -o etimes # връща колко секунди е работил прц�
 ```
 
 ### Common utilities
+* mkdir -p
+* symbolic link - l in the listing
+* file path_to_symbolic_link -> file path_to_symbolic_link: symbolic link to path
+* ln -s path_to_file link_name
+* readlink path_to_link
+* readlpath
+* ls -lh - принтира размера в human readable format
+* -v - verbose - дава ни повече информация
+* diff - report identical files
+* cp -r dir destination_dir
+* echo L3{a,b,c}456
+* ${x%.webm}.ogg
+* $((2 + 3 * 5))
+* ? - кой да е символ
+* $@, $* - списък на всички аргументи
+* $? - exit код от последната изпълнена команда
 ```bash
 echo "2 * 2 + 2" | bc # 8
 dirname /home/students/s62577/test.txt # /home/students/s62577
@@ -103,6 +119,8 @@ tempFile="${mktemp}" # съзадава временен файл и връща 
 # Change file permissions
 chmod 775 file
 chmod -R 775 folder # recursively chmod folder to 775
+
+date +%d.%m.%Y ?? # 18.06.2022
 ```
 
 ### Input and output redirection
