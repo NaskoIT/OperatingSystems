@@ -1,0 +1,15 @@
+E:\SU\Semester 4\OS\OperatingSystems\C\BytesParser\BytesParser\bin\Release\net6.0\BytesParser.exe
+E:\SU\Semester 4\OS\OperatingSystems\C\BytesParser\BytesParser\bin\Release\net6.0\BytesParser.deps.json
+E:\SU\Semester 4\OS\OperatingSystems\C\BytesParser\BytesParser\bin\Release\net6.0\BytesParser.runtimeconfig.json
+E:\SU\Semester 4\OS\OperatingSystems\C\BytesParser\BytesParser\bin\Release\net6.0\BytesParser.dll
+E:\SU\Semester 4\OS\OperatingSystems\C\BytesParser\BytesParser\bin\Release\net6.0\BytesParser.pdb
+E:\SU\Semester 4\OS\OperatingSystems\C\BytesParser\BytesParser\obj\Release\net6.0\BytesParser.csproj.AssemblyReference.cache
+E:\SU\Semester 4\OS\OperatingSystems\C\BytesParser\BytesParser\obj\Release\net6.0\BytesParser.GeneratedMSBuildEditorConfig.editorconfig
+E:\SU\Semester 4\OS\OperatingSystems\C\BytesParser\BytesParser\obj\Release\net6.0\BytesParser.AssemblyInfoInputs.cache
+E:\SU\Semester 4\OS\OperatingSystems\C\BytesParser\BytesParser\obj\Release\net6.0\BytesParser.AssemblyInfo.cs
+E:\SU\Semester 4\OS\OperatingSystems\C\BytesParser\BytesParser\obj\Release\net6.0\BytesParser.csproj.CoreCompileInputs.cache
+E:\SU\Semester 4\OS\OperatingSystems\C\BytesParser\BytesParser\obj\Release\net6.0\BytesParser.dll
+E:\SU\Semester 4\OS\OperatingSystems\C\BytesParser\BytesParser\obj\Release\net6.0\refint\BytesParser.dll
+E:\SU\Semester 4\OS\OperatingSystems\C\BytesParser\BytesParser\obj\Release\net6.0\BytesParser.pdb
+E:\SU\Semester 4\OS\OperatingSystems\C\BytesParser\BytesParser\obj\Release\net6.0\BytesParser.genruntimeconfig.cache
+E:\SU\Semester 4\OS\OperatingSystems\C\BytesParser\BytesParser\obj\Release\net6.0\ref\BytesParser.dll

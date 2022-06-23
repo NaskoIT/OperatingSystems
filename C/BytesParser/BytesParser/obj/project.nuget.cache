@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "Uk2ZGtlO44X8R76N0Zwbq7vdNuB+Ih93T37ODX+wM0pgaYvwvLYV3dUm/FGgoljcBhrQnZ8dEDCMlAWWcHfJBg==",
+  "success": true,
+  "projectFilePath": "E:\\SU\\Semester 4\\OS\\OperatingSystems\\C\\BytesParser\\BytesParser\\BytesParser.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\jilan\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x64\\6.0.4\\microsoft.netcore.app.runtime.win-x64.6.0.4.nupkg.sha512",
+    "C:\\Users\\jilan\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x64\\6.0.4\\microsoft.windowsdesktop.app.runtime.win-x64.6.0.4.nupkg.sha512",
+    "C:\\Users\\jilan\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x64\\6.0.4\\microsoft.aspnetcore.app.runtime.win-x64.6.0.4.nupkg.sha512"
+  ],
+  "logs": []
+}
