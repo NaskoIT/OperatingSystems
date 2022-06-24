@@ -90,19 +90,18 @@ int main(int argc, char** argv) {
 		err(4, "Error on reading the file");
 	}
 
-	uint16_t result = 0;
+	int pipes[8][2];
 	for(int i = 0; i < index; i++) {
-		int a[2];
-		if (pipe(a) == -1) {
+		if (pipe(pipes[i]) == -1) {
 			err(6, "Error on pipe");
 		}
 
 		int pid = fork();
 		if(pid == -1) {
-			err(5, "Erron on fork");
+			err(5, "Error on fork");
 		}
 		else if (pid == 0) {
-			close(a[0]);
+			close(pipes[i][0]);
 			int file = open((const char*)&files[i].name, O_RDONLY);
 			if (file == -1) {
 				err(7, "Error opening the file!");
@@ -120,17 +119,21 @@ int main(int argc, char** argv) {
 			}
 
 			//printf("Final result: child: %d: %d\n", i, xorResult);
-
-			write(a[1], &xorResult, sizeof(uint16_t));
+			write(pipes[i][1], &xorResult, sizeof(uint16_t));
 			exit(0);
 		}
 		else {
-			uint16_t childResult = 0;
-			close(a[1]);
-			read(a[0], &childResult, sizeof(uint16_t));
-			//printf("%d\n", childResult);
-			result ^= childResult;
+			close(pipes[i][1]);
 		}
+	}
+
+	uint16_t result = 0;
+	for(int i = 0; i < index; i++) {
+		uint16_t childResult = 0;
+		read(pipes[i][0], &childResult, sizeof(uint16_t));
+		//printf("%d\n", childResult);
+		result ^= childResult;
+
 	}
 
 	printf("result: %X\n", result);
