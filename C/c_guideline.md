@@ -182,3 +182,24 @@ int fd = open("a.txt", ...);
 dup2(fd, 1);
 exec(ls, ...); // this line will write to the a.txt
 ```
+* Съвети за изпита
+    - Ако ни е казано че ще четем uint32_t числа може да проверим дали размера на файле се дели на 4 (понеже uint32_t число е 4 байта)
+    - 
+```c
+char command[256];
+int commandLength = read(0, &command, sizeof(command));
+command[commandLength] = '\0';
+const char* bin = "\bin\";
+char buffer[301];
+strcpy(buffer, bin);
+strcat(buffer, command);
+```
+* execvp
+* mkfifo
+    - ```mkfifo(char* pipeName, mode_t mode)```
+    - On success mkfifo() and mkfifoat() return 0.  In the case of an error, -1 is returned (in which case, errno is set appropriately).
+* ````unlink(char* pipePath)``` - remove a directory entry
+* remove
+    - remove a file or directory
+    - ```int remove(const char *pathname);```
+    - remove() deletes a name from the filesystem.  It calls unlink(2) for files, and rmdir(2) for directories.
